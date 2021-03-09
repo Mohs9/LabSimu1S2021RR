@@ -26,4 +26,4 @@ echo Para compilar: gcc -o $nombre $fnombre >> $fnombre
 echo "Fecha: " $fecha >> $fnombre
 echo "Librerias: stdio (u otras)" >> $fnombre
 echo "Entradas, Salidas, Resumen:" >> $fnombre
-echo "/*" >> $fnombre
+echo "*/" >> $fnombre
