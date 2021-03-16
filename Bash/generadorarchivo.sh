@@ -27,3 +27,8 @@ echo "Fecha: " $fecha >> $fnombre
 echo "Librerias: stdio (u otras)" >> $fnombre
 echo "Entradas, Salidas, Resumen:" >> $fnombre
 echo "*/" >> $fnombre
+echo " " >> $fnombre
+echo "//Librerias" >> $fnombre
+echo "#include <stdio.h>" >> $fnombre
+echo "//Declaracion e inicializacion de variables globales" >> $nombre
+
