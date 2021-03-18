@@ -13,10 +13,10 @@ Entradas, Salidas, Resumen: lee dos números enteros para generar un rango y mue
 
 
 int main(){
-    int N1, N2;
+    int N1, N2; //Declarar variables enteras
     
     
-    printf("Ingrese dos números enteros positivos: \n");
+    printf("Ingrese dos números enteros positivos: \n"); // Lee dos numeros positivos.
     scanf("%d, %d", &N1, &N2);
    
         
@@ -38,9 +38,11 @@ int main(){
                j++;
             }
         }
+        //Si el flag primo no cambia a 0 es por que sí es primo y lo imprime.
         if(primo==1){
             printf("%d, \n", N1);
         }
+        //Aumenta el N1 en 1.
         N1++;
     }
 }

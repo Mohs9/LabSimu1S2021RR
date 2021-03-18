@@ -13,39 +13,37 @@ pare cuando se ingrese una negativa y calcule la media, maximo y minimo.
 #include <stdbool.h>
 //Declaracion de variables globales
 int main(){
-    float x=0, max,min, media=0;
-    int  n=0;
-    printf("Ingresa un numero real \n");
-    scanf("%f", &x);
-    max=x;
+    float x=0, max, min, media=0; //Declarar las variables de tipo flotante
+    int  n=0;  //Declara la variable de tipo entero.
+    printf("Ingresa un numero real \n"); 
+    scanf("%f", &x); //Lee el primer número con el que se inicializará el conjunto.
+    max=x;  //Le asigna valor de x a las variables min y max que usara para comparar.
     min=x; 
-    printf("maximo:%f, \nminimo:%f \n", max, min);
+    
+    //Ejecuta las instrucciones y luego evalúa la condición
     do{
        printf("Ingrese un numero real \n");
        scanf("%f", &x);
-
+    //Si x es un número positivo entonces lo agrega a la sumatoria de media.
+    //Si es positivo o cero, incrementa en 1 la variable n.
            if(x>=0){
                n++;
                media+= x;
-               //array[n-1]=x;
-              //min=array[0];
+               //Si el nuevo numero es mayor que el anterior lo guarda en la variable máximo.
+               //Si es menor que el anterior minimo lo guarda como nuevo mínimo.
                if(x>=max){
                    max=x;
-
-               }
-               if(x<min){
+               }else if(x<min){
                    min=x;
                }
-               
             }
-
-       printf("maximo: %f,\nminimo:%f \n", max, min);
-       }while(x>=0);
-
-       if(n==0){
-           printf("los valores eran negativo");
-       }else{
-           printf("media: %.2f,maximo: %f, minimo: %f", media/n, max, min);
-       }
+     }while(x>=0);
+        
+     //Si n no aumentó es porque los numéros eran negativos e imprime la media, el maximo y el mínimo de los números dados.
+     if(n==0){
+         printf("los valores eran negativo");
+     }else{
+         printf("media: %.2f,maximo: %f, minimo: %f", media/n, max, min);
+     }
     
 }
