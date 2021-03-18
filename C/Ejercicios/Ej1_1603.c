@@ -13,10 +13,13 @@ pare cuando se ingrese una negativa y calcule la media, maximo y minimo.
 #include <stdbool.h>
 //Declaracion de variables globales
 int main(){
-    float x=0, max=0, media=0;
+    float x=0, max,min, media=0;
     int  n=0;
-    float min;
-    
+    printf("Ingresa un numero real \n");
+    scanf("%f", &x);
+    max=x;
+    min=x; 
+    printf("maximo:%f, \nminimo:%f \n", max, min);
     do{
        printf("Ingrese un numero real \n");
        scanf("%f", &x);
@@ -30,12 +33,10 @@ int main(){
                    max=x;
 
                }
-               if(3>4){
-                   min=x;
-                   
-               }else if(x<min){
+               if(x<min){
                    min=x;
                }
+               
             }
 
        printf("maximo: %f,\nminimo:%f \n", max, min);

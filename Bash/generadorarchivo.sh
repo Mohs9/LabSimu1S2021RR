@@ -15,7 +15,7 @@ if [ -z $nombre ]; then
     exit 2
 fi
 #obtener informacion del sistema
-autor="Rubi E. Ramirez Milian"
+autor="Rubí E. Ramírez Milián"
 fecha=$(date)
 version=$(gcc --version | head -n 1)
 #crear nuestro contenido
@@ -24,11 +24,11 @@ echo "Autor: " $autor >> $fnombre
 echo "Compliador:" $version >> $fnombre
 echo Para compilar: gcc -o $nombre $fnombre >> $fnombre
 echo "Fecha: " $fecha >> $fnombre
-echo "Librerias: stdio (u otras)" >> $fnombre
+echo "Librerías: stdio (u otras)" >> $fnombre
 echo "Entradas, Salidas, Resumen:" >> $fnombre
 echo "*/" >> $fnombre
 echo " " >> $fnombre
 echo "//Librerias" >> $fnombre
 echo "#include <stdio.h>" >> $fnombre
-echo "//Declaracion e inicializacion de variables globales" >> $nombre
+echo "//Declaración e inicialización de variables globales" >> $fnombre
 
