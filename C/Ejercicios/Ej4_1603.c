@@ -31,7 +31,7 @@ int main(){
         int j=2, primo=1; //inicializamos las variables con las que vamos a comprobar si es primo o no
         //Con este ciclo while, mientras j sea menor que la raíz cuadrada entera del número y el flag primo sea igual a 1.    
         while(j<i && primo==1){
-        //Si k es congruente con j el flag primo cambia a 0. Si no j aumenta 1
+        //Si N1 es congruente con j el flag primo cambia a 0. Si no j aumenta 1
             if(N1%j==0){
                primo=0;
             }else{

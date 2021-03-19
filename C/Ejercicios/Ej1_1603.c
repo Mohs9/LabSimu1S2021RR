@@ -10,7 +10,6 @@ pare cuando se ingrese una negativa y calcule la media, maximo y minimo.
  
 //Librerias
 #include <stdio.h>
-#include <stdbool.h>
 //Declaracion de variables globales
 int main(){
     float x=0, max, min, media=0; //Declarar las variables de tipo flotante
