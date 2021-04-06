@@ -10,7 +10,6 @@ Entradas, Salidas, Resumen:
 //Librerias
 #include <stdio.h>
 //Declaración e inicialización de funciones
-
 float suma(float A, float B);
 float resta(float A, float B);
 float multiplicacion(float A, float B);
@@ -21,29 +20,29 @@ int main()
     float A, B;
     int X;
     float result;
-    printf("Ingrese el primer numero:\n");
+    printf("Ingrese el primer numero:\n");//Pide el primer número
     scanf("%f", &A);
-    printf("Ingrese el segundo numero:\n");
+    printf("Ingrese el segundo numero:\n");//Pide el segundo número
     scanf("%f", &B);
-    printf("Ingrese un digito del 0 al 4:\n");
+    printf("Ingrese un digito del 0 al 4:\n");//Pide un dígito del 0 al 4 para ejecutar alguna función
     scanf("%d", &X);
     if (X == 1)
-    {
+    {   //Si el usuario escoge 1 suma
         result = suma(A, B);
-        printf("Usted escogio suma: %1.f", result);
+        printf("Usted escogio suma: %.2f", result);
     }
     else if (X == 2)
-    {
+    { //Si el usuario escoge 2 resta
         result = resta(A, B);
         printf("Usted escogio resta: %.2f", result);
     }
     else if (X == 3)
-    {
+    { //Si el usuario escoge 3 multiplica
         result = multiplicacion(A, B);
         printf("Usted escogio multiplicacion: %.2f", result);
     }
     else if (X == 4)
-    {
+    { //Si el usuario escoge 4 divide
         result = division(A, B);
         printf("Usted escogio division: %f", result);
     }
