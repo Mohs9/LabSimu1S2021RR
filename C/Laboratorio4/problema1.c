@@ -82,6 +82,7 @@ void print_ascendentemente(int a[], int n)
     {
         printf("%d  ", a[i]);
     }
+    printf("\n");
 }
 //imprime el vector del maximo al minimo
 void print_descendentemente(int a[], int n)
@@ -90,4 +91,5 @@ void print_descendentemente(int a[], int n)
     {
         printf("%d  ", a[i]);
     }
+    printf("\n");
 }
