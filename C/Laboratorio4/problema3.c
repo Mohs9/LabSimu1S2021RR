@@ -84,17 +84,17 @@ double producto_escalar(double A[], double B[], int n){
 
 //Producto vectorial
 void producto_vectorial(double A[], double B[], int n){
-    double V[n];
+    double C[n];
     int p, q;
     //Dado que la posición de las coordenadas en la fórmula se repite cíclicamente se puede aprovechar esta propiedad y usar m\'odulos.
     for(int m = 0; m < n; m++){
         p = (m+1)%3;
         q = (m+2)%3;
-        V[m]= A[p]*B[q]-A[q]*B[p];
+        C[m]= A[p]*B[q]-A[q]*B[p];
     }
     //Imprime las coordenadas del nuevo vector.
     for (int i = 0; i < n; i++){
-        printf("%lf ", V[i]);
+        printf("%lf ", C[i]);
     }
     printf("\n");
 }
