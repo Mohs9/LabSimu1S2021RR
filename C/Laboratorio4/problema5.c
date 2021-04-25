@@ -22,12 +22,12 @@ void main()
     //solicita el valor de numero hasta que este sea mayor o igual a 0
     do
     {
-        printf("introducir el valor de n: ");
+        printf("Introducir un numero entero positivo: ");
         scanf("%d", &n);
     } while (n <= 1);
     puts("Factorial ! \n");
 
-    //se realiza la ejecucion de los numeros de fibonacci por cada secuencia, es decir
+    //se realiza la ejecucion del factorial de n
     printf("%d", factorial(n));
 
     puts("\n");
@@ -36,7 +36,7 @@ void main()
 //funcion factorial la cual se llama a si misma dependiendo del numero que ingresa en ella
 long factorial(int n)
 {
-    //si el valor es 0 o 1 solo regresa este valor
+    //si el valor es 0 o 1 solo regresa 1
     if (n == 0 || n == 1)
         return 1;
     else
