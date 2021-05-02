@@ -40,6 +40,7 @@ int main()
     float ln_b_error=0;
     float b;
     float incerteza_ln_presion;
+    float desviacion;
 
     //Ahora debemos volver la función lineal para usar mínimos cuadrados, usamos logaritmos para ello
 
@@ -47,10 +48,6 @@ int main()
     for (int i = 0; i < n; i++)
     {
         ln_volumen[i] = log(volumen[i]);
-    }
-
-    for (int i = 0; i < n; i++)
-    {
         ln_presion[i] = log(presion[i]);
     }
 
@@ -61,17 +58,14 @@ int main()
     b = pow(2.71828, ln_b);
 
         //Incerteza en las nuevas variables x y y, debe ser la desviaviación estándar
-        for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         ln_volumen_error[i] = xerror/(volumen[i]);
-    }
-
-    for(int i=0; i< n;i++){
         incerteza_ln_presion += pow((ln_presion[i] - ln_b - a * ln_volumen[i]),2)/n;
         
     }
-    
-    float desviacion= sqrt(incerteza_ln_presion);
+
+    desviacion = sqrt(incerteza_ln_presion);
     ln_b_error= desviacion*sqrt(sumatoria_xy(ln_volumen,ln_volumen)/Deltax);
     a_error = sqrt(n) * desviacion/ (sqrt(Deltax));
 
@@ -79,7 +73,7 @@ int main()
     r = (n * sumatoria_xy(ln_volumen, ln_presion)-sumatoria_datos(ln_volumen) * sumatoria_datos(ln_presion)) / sqrt(Deltax*Deltay);
     
     printf("ln P = %f ln V+ %f\n", a, ln_b);
-    printf("b= %f +/- %f\n", b, ln_b_error * pow(2.71828, ln_b));
+    printf("b= %f +/- %f\n", b, ln_b_error * exp(ln_b));
     printf("a= %f +/- %f\n", a, a_error);
     printf("El valor de P cuando V=100 in^{3}=%f lb/in^{3} \n", b*pow(100,a));
     //el coeficiente de determinacion es el cuadrado de r
@@ -95,7 +89,25 @@ int main()
         fprintf(archivoPuntos, "%lf %lf %lf %lf \n", ln_volumen[i], ln_volumen_error[i], ln_presion[i], desviacion);
     }
 
-    
+    FILE *gnu_config1 = popen("gnuplot -persist", "w");
+    fprintf(gnu_config1, "unset label\n");
+    fprintf(gnu_config1, "set terminal 'epslatex'\n");
+    fprintf(gnu_config1, "set output 'pv.tex'\n");
+    fprintf(gnu_config1, "set xrange [40:200]\n");
+    fprintf(gnu_config1, "set yrange [5:90]\n");
+    fprintf(gnu_config1, "set title 'Presion vrs. Volumen'\n");
+    fprintf(gnu_config1, "set xlabel ' V[in$ ^ {3} $]'\n");
+    fprintf(gnu_config1, "set ylabel 'P[lb / in$ ^ {3} $]'\n");
+    fprintf(gnu_config1, "unset key\n");
+    fprintf(gnu_config1, "set grid\n");
+    fprintf(gnu_config1, "unset key\n");
+    fprintf(gnu_config1, "a=%f\n", a);
+    fprintf(gnu_config1, "b=%f\n", b);
+    fprintf(gnu_config1, "f(x)=b*x**a\n");
+    fprintf(gnu_config1, "unset key\n");
+    fprintf(gnu_config1, "plot f(x),     'datos.dat' using 1:3:2:4 with xyerrorbars pt 3\n");
+    fprintf(gnu_config1, "set  output\n");
+
     FILE *gnu_config = popen("gnuplot -persist", "w");
     fprintf(gnu_config, "unset label\n");
     fprintf(gnu_config, "set terminal 'epslatex'\n");
@@ -116,26 +128,6 @@ int main()
     fprintf(gnu_config, "plot f(x), 'datln.txt' using 1:3:2:4 with xyerrorbars pt 3\n");
     fprintf(gnu_config, "set  output\n");
 
-    
-    FILE *gnu_config1= popen("gnuplot -persist", "w");
-    fprintf(gnu_config1, "unset label\n");
-    fprintf(gnu_config1, "set terminal 'epslatex'\n");
-    fprintf(gnu_config1, "set output 'pv.tex'\n");
-    fprintf(gnu_config1, "set xrange [40:200]\n");
-    fprintf(gnu_config1, "set yrange [5:90]\n");
-    fprintf(gnu_config1, "set title 'Presion vrs. Volumen'\n");
-    fprintf(gnu_config1, "set xlabel ' V[in$ ^ {3} $]'\n");
-    fprintf(gnu_config1, "set ylabel 'P[lb / in$ ^ {3} $]'\n");
-    fprintf(gnu_config1, "set grid\n");
-    fprintf(gnu_config1, "unset key\n");
-    fprintf(gnu_config1, "set grid\n");
-    fprintf(gnu_config1, "unset key\n");
-    fprintf(gnu_config1, "a=%f\n", a);
-    fprintf(gnu_config1, "b=%f\n", b);
-    fprintf(gnu_config1, "f(x)=b*x**a\n");
-    fprintf(gnu_config1, "unset key\n");
-    fprintf(gnu_config1, "plot f(x), 'datos.dat' using 1:3:2:4 with xyerrorbars pt 3\n");
-    fprintf(gnu_config1, "set  output\n");
 
     pclose(gnu_config1);
     pclose(gnu_config);
