@@ -81,14 +81,15 @@ int main()
 
     /* se crea y se abre el archivo datln.txt en modo escritura 
      * para almacenar los valores de x y y que están declarados en los arreglos ln_volumen y ln_presion y sus incertezas*/
-    FILE *archivoPuntos = fopen("datln.txt", "w");
+    FILE *archivoPuntos =fopen("datosln.dat", "w");
 
     /*Guardar los puntos x,y en el archivo de texto creado y abierto previamente*/
     for (int i = 0; i <n; i++)
     {
-        fprintf(archivoPuntos, "%lf %lf %lf %lf \n", ln_volumen[i], ln_volumen_error[i], ln_presion[i], desviacion);
+        fprintf(archivoPuntos,"%f,   %f,  %f,  %f \n", ln_volumen[i], ln_volumen_error[i], ln_presion[i], desviacion);
     }
 
+    fclose(archivoPuntos);
     FILE *gnu_config1 = popen("gnuplot -persist", "w");
     fprintf(gnu_config1, "unset label\n");
     fprintf(gnu_config1, "set terminal 'epslatex'\n");
@@ -105,8 +106,8 @@ int main()
     fprintf(gnu_config1, "b=%f\n", b);
     fprintf(gnu_config1, "f(x)=b*x**a\n");
     fprintf(gnu_config1, "unset key\n");
-    fprintf(gnu_config1, "plot f(x),     'datos.dat' using 1:3:2:4 with xyerrorbars pt 3\n");
-    fprintf(gnu_config1, "set  output\n");
+    fprintf(gnu_config1, "plot f(x), 'datos.dat' using 1:3:2:4 with xyerrorbars pt 3\n");
+    fprintf(gnu_config1, "set output\n");
 
     FILE *gnu_config = popen("gnuplot -persist", "w");
     fprintf(gnu_config, "unset label\n");
@@ -125,13 +126,13 @@ int main()
     fprintf(gnu_config, "b=%f\n", ln_b);
     fprintf(gnu_config, "f(x)=a*x+b\n");
     fprintf(gnu_config, "unset key\n");
-    fprintf(gnu_config, "plot f(x), 'datln.txt' using 1:3:2:4 with xyerrorbars pt 3\n");
-    fprintf(gnu_config, "set  output\n");
+    fprintf(gnu_config, "set datafile separator comma\n");
+    fprintf(gnu_config, "plot f(x), 'datosln.dat' using 1:3:2:4 with xyerrorbars pt 3\n");
+    fprintf(gnu_config, "set output\n");
 
 
     pclose(gnu_config1);
     pclose(gnu_config);
-    fclose(archivoPuntos);
     return 0;
 }
 
