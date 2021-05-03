@@ -28,8 +28,8 @@ float sumatoria_datos(float x[]);
 int main()
 {
     //valores de cada parte de la ecuacion lineal
-    int Deltax=0;
-    int Deltay=0;
+    float Deltax=0;
+    float Deltay=0;
     float a=0;
     float ln_b=0;
     float r=0;
@@ -55,7 +55,7 @@ int main()
     Deltay = n * sumatoria_xy(ln_presion, ln_presion) - sumatoria_datos(ln_presion) * sumatoria_datos(ln_presion);
     a=(n * sumatoria_xy(ln_volumen,ln_presion) - sumatoria_datos(ln_volumen) * sumatoria_datos(ln_presion))/Deltax;
     ln_b=(sumatoria_datos(ln_presion)-a*sumatoria_datos(ln_volumen))/n;
-    b = pow(2.71828, ln_b);
+    b = exp(ln_b);
 
         //Incerteza en las nuevas variables x y y, debe ser la desviaviación estándar
     for (int i = 0; i < n; i++)
@@ -67,7 +67,7 @@ int main()
 
     desviacion = sqrt(incerteza_ln_presion);
     ln_b_error= desviacion*sqrt(sumatoria_xy(ln_volumen,ln_volumen)/Deltax);
-    a_error = sqrt(n) * desviacion/ (sqrt(Deltax));
+    a_error = sqrt(n) * desviacion / (sqrt(Deltax));
 
     //se obtiene el coeficiente de correlacion
     r = (n * sumatoria_xy(ln_volumen, ln_presion)-sumatoria_datos(ln_volumen) * sumatoria_datos(ln_presion)) / sqrt(Deltax*Deltay);
@@ -86,7 +86,7 @@ int main()
     /*Guardar los puntos x,y en el archivo de texto creado y abierto previamente*/
     for (int i = 0; i <n; i++)
     {
-        fprintf(archivoPuntos,"%f,   %f,  %f,  %f \n", ln_volumen[i], ln_volumen_error[i], ln_presion[i], desviacion);
+        fprintf(archivoPuntos, "%f,   %f,  %f,  %f \n", ln_volumen[i], ln_volumen_error[i], ln_presion[i], desviacion);
     }
 
     fclose(archivoPuntos);

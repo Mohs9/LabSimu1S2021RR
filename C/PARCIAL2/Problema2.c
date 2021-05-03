@@ -16,7 +16,7 @@ Entradas, Salidas, Resumen: Métos de Newton-Ramphson
 float funcion(float x);
 float valor_absoluto(float x);
 
-void main(){
+int main(){
     //Definimos las variables que serán el intervalo
     float xa =2;
     float xp;
@@ -48,6 +48,26 @@ void main(){
     
     }
     printf("xp=%f \n", xp);
+
+    FILE *gnu = popen("gnuplot -persist", "w");
+    fprintf(gnu, "unset label\n");
+    fprintf(gnu, "set terminal 'epslatex'\n");
+    fprintf(gnu, "set output 'funcion.tex'\n");
+    fprintf(gnu, "set xrange [-4:4]\n");
+    fprintf(gnu, "set yrange [-1:1]\n");
+    fprintf(gnu, "set title ''\n");
+    fprintf(gnu, "set xlabel 'x'\n");
+    fprintf(gnu, "set ylabel 'sin(x)/x'\n");
+    fprintf(gnu, "set grid\n");
+    fprintf(gnu, "unset key\n");
+    fprintf(gnu, "set grid\n");
+    fprintf(gnu, "unset key\n");
+    fprintf(gnu, "f(x)=sin(x)/x\n");
+    fprintf(gnu, "plot f(x)\n");
+    fprintf(gnu, "set output\n");
+
+    pclose(gnu);
+    return 0;
 }
 
 
