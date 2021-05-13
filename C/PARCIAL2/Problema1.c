@@ -38,7 +38,7 @@ int main()
     float ln_volumen_error[n];
     float a_error=0;
     float ln_b_error=0;
-    float b;
+    float b=0;
     float incerteza_ln_presion;
     float desviacion;
 
